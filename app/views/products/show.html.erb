@@ -1,0 +1,10 @@
+<h1>Product Details</h1>
+
+<%= render partial: "product", layout:'box', locals: { product: @product } %>
+
+
+<p>More details coming soon...</p>
+<%= render partial: "cart/item", locals: { product: @product, quantity:3 } %>
+
+#using object
+<%= render partial:"product", object:@product %>

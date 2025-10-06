@@ -1,0 +1,14 @@
+<h1>Title: <%= @book.title %></h1>
+
+<p>Author: <%= @book.author.name %></p>
+<p>Year Published: <%= @book.year_published %></p>
+<p>Price: $<%= @book.price %></p>
+<div>ISBN: <%= @book.isbn %></div>
+<div>Views :<%= @book.views %></div>
+<div>Out of Print: <%= @book.out_of_print ? "Yes" : "No" %></div>
+
+<hr>
+
+<%= link_to "Edit this book", edit_book_path(@book) %> |
+<%= link_to "Delete this book", @book, method: :delete, data: { confirm: "Are you sure?" } %> |
+<%= link_to "Back to all books", books_path %>

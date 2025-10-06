@@ -1,0 +1,6 @@
+<h1>Orders by <%= @customer.first_name %></h1>
+<%= @orders.each do|order| %>
+<div><%= order.total %></div>
+<div><%= order.status %></div>
+
+<% end %>

@@ -1,0 +1,13 @@
+<h1>Reviews for <%= @book.title %></h1>
+
+<% @reviews.each do |review| %>
+  <p><strong>Title:</strong> <%= review.title %></p>
+  <p><%= link_to "Show", review_path(review) %> |
+     <%= link_to "Edit", edit_review_path(review) %> |
+     <%= link_to "Delete", review_path(review), method: :delete, data: { confirm: "Are you sure?" } %>
+  </p>
+  <hr>
+<% end %>
+
+<%= link_to "New Review", new_book_review_path(@book) %>
+<%= link_to "Back to Books", books_path %>

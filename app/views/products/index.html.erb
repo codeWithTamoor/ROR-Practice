@@ -1,0 +1,26 @@
+
+<!-- iterating on @products rendering partail each time -->
+<h3>iterating on @products rendering partail each time</h3>
+<%@products.each do |product| %>
+<%= render partial:"product",locals:{product: product} %>
+
+<% end %>
+
+
+
+<!-- render partials each time but with shorthand method -->
+<h3>render partials each time but with shorthand method</h3>
+<%= render @products %> 
+
+
+<!-- using collection and spacer templates -->
+<h1>All Products</h1> 
+<%= render partial: "product", collection: @products, spacer_template:"product_ruler" %> 
+
+
+
+
+
+
+
+

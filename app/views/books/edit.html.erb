@@ -1,0 +1,47 @@
+<h1>Edit Book</h1>
+
+<%= form_with(model: @book, local: true) do |form| %>
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </p>
+
+  <p>
+    <%= form.label :year_published %><br>
+    <%= form.number_field :year_published %>
+  </p>
+
+  <p>
+    <%= form.label :isbn %><br>
+    <%= form.text_field :isbn %>
+  </p>
+
+  <p>
+    <%= form.label :price %><br>
+    <%= form.number_field :price, step: 0.01 %>
+  </p>
+
+  <p>
+    <%= form.label :out_of_print %><br>
+    <%= form.check_box :out_of_print %>
+  </p>
+
+  <p>
+    <%= form.label :views %><br>
+    <%= form.number_field :views %>
+  </p>
+
+  <p>
+    <%= form.label :supplier_id, "Supplier" %><br>
+    <%= form.collection_select :supplier_id, Supplier.all, :id, :name, prompt: "Choose supplier" %>
+  </p>
+
+  <p>
+    <%= form.label :author_id, "Author" %><br>
+    <%= form.collection_select :author_id, Author.all, :id, :name, prompt: "Choose author" %>
+  </p>
+
+  <%= form.submit "Update Book" %>
+<% end %>
+
+<%= link_to "Back to all books", books_path %>

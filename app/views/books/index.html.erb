@@ -1,0 +1,19 @@
+<h1>All Books</h1>
+
+ 
+<%= link_to "Add new book", new_book_path %>
+
+<ul>
+  <% @books.each do |book| %>
+    <li>
+      <strong><%= link_to book.title, book_path(book) %></strong><br>
+      Year: <%= book.year_published %><br>
+      ISBN: <%= book.isbn %><br>
+      Price: <%= number_to_currency(book.price) %><br>
+      Views: <%= book.views %><br>
+      Out of Print: <%= book.out_of_print ? "Yes" : "No" %><br>
+      Supplier ID: <%= book.supplier_id %> | Author ID: <%= book.author_id %>
+    </li>
+    <hr>
+  <% end %>
+</ul>
