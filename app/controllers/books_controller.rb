@@ -5,7 +5,16 @@ class BooksController<ApplicationController
     @books=Book.all
   end
   def show
-    @book = B'.ook.find(params[:id])
+    @book = Book.find_by(id: params[:id])
+      if @book.nil?
+
+        @books = Book.all
+        flash.now[:alert] = "Your book was not found"
+        render "index"
+        #redirect_to books_path, alert: "Book not found!"
+        #render action: "index".  it will give an error as index action will not run
+      end
+
   end
 
   def new

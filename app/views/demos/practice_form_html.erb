@@ -1,0 +1,25 @@
+<h2>Practice Form</h2>
+
+<%= form_with url: "/practice_submit", method: :post do %>
+  <h3>Basic Hash Example</h3>
+  <%= label_tag "user[name]", "Name" %>
+  <%= text_field_tag "user[name]" %>
+
+  <%= label_tag "user[phone]", "Phone" %>
+  <%= text_field_tag "user[phone]" %>
+
+  <h3>Nested Hash Example</h3>
+  <%= label_tag "user[address][city]", "City" %>
+  <%= text_field_tag "user[address][city]" %>
+
+  <%= label_tag "user[address][postcode]", "Postcode" %>
+  <%= text_field_tag "user[address][postcode]" %>
+
+  <h3>Array Example</h3>
+  <%= check_box_tag "ids[]", "1" %> ID 1
+  <%= check_box_tag "ids[]", "2" %> ID 2
+  <%= check_box_tag "ids[]", "3" %> ID 3
+
+  <br><br>
+  <%= submit_tag "Submit" %>
+<% end %>

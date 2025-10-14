@@ -1,4 +1,8 @@
 <h1>All Books</h1>
+<% if flash[:alert] %>
+    <p class="alert"><%= flash[:alert] %></p>
+  <% end %>
+
 
  
 <%= link_to "Add new book", new_book_path %>

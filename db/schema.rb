@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_03_124034) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_06_142905) do
   create_table "admins", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -65,10 +65,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_03_124034) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer "cart_id", null: false
-    t.integer "product_id", null: false
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "product_id"
     t.index ["cart_id"], name: "index_cart_items_on_cart_id"
     t.index ["product_id"], name: "index_cart_items_on_product_id"
   end
@@ -99,6 +99,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_03_124034) do
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
   end
 
+  create_table "courses", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -118,6 +124,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_03_124034) do
     t.integer "manager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "enrollments", id: false, force: :cascade do |t|
+    t.integer "student_id", null: false
+    t.integer "course_id", null: false
+    t.string "grade"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_enrollments_on_course_id"
+    t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
 
   create_table "entries", force: :cascade do |t|
@@ -174,7 +190,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_03_124034) do
     t.datetime "updated_at", null: false
     t.string "description"
     t.integer "price"
+    t.string "sku"
     t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["sku"], name: "index_products_on_sku", unique: true
   end
 
   create_table "publishers", force: :cascade do |t|
@@ -207,10 +225,28 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_03_124034) do
     t.index ["customer_id"], name: "index_reviews_on_customer_id"
   end
 
+  create_table "students", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "suppliers", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "vehicles", force: :cascade do |t|
@@ -234,6 +270,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_03_124034) do
   add_foreign_key "books", "suppliers"
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "products"
+  add_foreign_key "enrollments", "courses"
+  add_foreign_key "enrollments", "students"
   add_foreign_key "orders", "customers"
   add_foreign_key "products", "categories"
   add_foreign_key "publishers_books", "books"

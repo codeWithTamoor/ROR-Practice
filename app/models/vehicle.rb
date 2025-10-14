@@ -1,4 +1,6 @@
 class Vehicle < ApplicationRecord
+
+  #call backs
   after_create :log_vehicle
   scope :expensive, -> { where ("price>150000") }
 

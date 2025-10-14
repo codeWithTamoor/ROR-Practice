@@ -3,6 +3,7 @@ class PublishersController < ApplicationController
 
   # GET /publishers or /publishers.json
   def index
+    #publishers will store in memeory as an array
     @publishers = Publisher.all
   end
 
@@ -65,6 +66,7 @@ class PublishersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def publisher_params
+      #will get params as a hash logic
       params.expect(publisher: [ :name, :country ])
     end
 end
